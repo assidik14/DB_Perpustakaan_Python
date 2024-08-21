@@ -1,4 +1,5 @@
 import os
+from . import Operasi
 
 def clear_console ():
     '''Fungsi untuk clear console'''
@@ -33,4 +34,30 @@ def menu():
             case 2 : print(f"{opsi_menu}. READ DATA")
             case 3 : print(f"{opsi_menu}. UPDATE DATA")
             case 4 : print(f"{opsi_menu}. DELETE DATA")
-    print("\n")
+
+def read_console():
+    '''Fungsi read data di console'''
+    data_file = Operasi.read()
+    
+    index = "NO"
+    judul = "JUDUL"
+    penulis = "PENULIS"
+    tahun = "TAHUN"
+
+    # Header
+    print("\n"+100*"=")
+    print(f"{index:^4} | {judul:^40} | {penulis:^40} | {tahun:^5}")
+    print(100*"-")
+
+    # Data
+    for index, data in enumerate(data_file):
+        data_break = data.split(",")
+        pk = data_break[0]
+        date_add = data_break[1]
+        penulis = data_break[2]
+        judul = data_break[3]
+        tahun = data_break[4]
+        print(f"{index+1:4} | {judul:.40} | {penulis:.40} | {tahun:4}",end="")
+
+    # Footer
+    print(100*"="+"\n")

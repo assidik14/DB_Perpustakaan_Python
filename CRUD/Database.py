@@ -1,11 +1,11 @@
-from . import CRUD
+from . import Operasi
 
 DB_NAME = "data.txt"
 TEMPLATE = {
     "pk":"XXXXXX",
-    "date_add":"yyyy-mm-dd",
-    "judul":255*" ",
+    "date_add":"dd-mm-yyyy",
     "penulis":255*" ",
+    "judul":255*" ",
     "tahun":"yyyy"
 }
 
@@ -15,7 +15,6 @@ def init_console():
         with open(DB_NAME, mode="r", encoding="utf-8") as file:
             print("Database tersedia, init done!!")
 
-    except Exception as ErrorMessage :
-        print(ErrorMessage)
-        print("Database tidak ditemukan, silakan membuat database baru")
-        CRUD.first_data()
+    except FileNotFoundError :
+        print("Database tidak ditemukan!!\nSilakan membuat database baru")
+        Operasi.first_data()
