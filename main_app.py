@@ -25,7 +25,7 @@ if __name__ == "__main__":
                 break
 
         match pilih_Menu :
-            case 1 : Operasi.create()
+            case 1 : View.create_console()
             case 2 : View.read_console()
             case 3 : Operasi.update()
             case 4 : Operasi.delete()

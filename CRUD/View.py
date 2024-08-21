@@ -61,3 +61,7 @@ def read_console():
 
     # Footer
     print(100*"="+"\n")
+
+def create_console():
+    '''Fungsi create data di console'''
+    print("Create Console")
