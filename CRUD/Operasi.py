@@ -43,12 +43,27 @@ def first_data():
     except Exception:
         print("Gagal menulis data!!")
 
-def create():
+def create(penulis:str, judul:str, tahun:int):
     '''Fungsi Create Data'''
-    print("FUNGSI CREATE DATA")
+
+    time_format = time.strftime("%d-%m-%Y-%H:%M:%S%z", time.localtime())
+
+    data = Database.TEMPLATE.copy()
+    data["pk"] = Util.random_string(6)
+    data["date_add"] = time_format
+    data["penulis"] = penulis + Database.TEMPLATE["penulis"][len(penulis):]
+    data["judul"] = judul + Database.TEMPLATE["judul"][len(judul):]
+    data["tahun"] = tahun
+
+    try:
+        with open(Database.DB_NAME, mode="a", encoding="utf-8") as file:
+            str_data = f"{data['pk']}, {data['date_add']}, {data['penulis']}, {data['judul']}, {data['tahun']}\n"
+            file.write(str_data)
+    except Exception:
+        print("Gagal menulis data!!")
 
 def read():
-    '''Fungsi Read Data'''
+    '''FUNGSI READ DATA'''
     try:
         with open(Database.DB_NAME, mode="r", encoding="UTF-8") as file:
             content = file.readlines()

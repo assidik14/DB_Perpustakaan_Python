@@ -64,4 +64,31 @@ def read_console():
 
 def create_console():
     '''Fungsi create data di console'''
-    print("Create Console")
+    print(f"\n{'-----====== Silakan Masukan Data ======-----':^45}")
+    while (True):
+        penulis = input("Masukan Nama Penulis : ")
+        if penulis == "":
+            print("Nama penulis tidak boleh kosong")
+        else:
+            break
+
+    while (True):
+        judul = input("Masukan Judul : ")
+        if judul == "":
+            print("Judul buku harus di isi")
+        else:
+            break
+    
+    while (True):
+        tahun = input("Masukan Tahun : ")
+        if tahun == "":
+            print("Tahun tidak boleh kosong!!!")
+        elif tahun.isdigit() == False:
+            print("Tahun harus angka!!")
+        else:
+            break
+    try :
+        Operasi.create(penulis, judul, tahun)
+        print(f"{'-----===== Data berhasil ditambah =====-----':^45}")
+    except Exception:
+        print("Data tidak berhasil di tambahkan")
