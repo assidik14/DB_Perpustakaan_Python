@@ -16,13 +16,18 @@ if __name__ == "__main__":
         View.menu()
         View.divider()
         
-        # User input menu
+        # User input menu dengan validasi
         while (True):
-            pilih_Menu = int(input("Pilih Menu : "))
-            if pilih_Menu != 1 and pilih_Menu != 2 and pilih_Menu != 3 and pilih_Menu != 4:
-                print("Menu yang kamu pilih salah, silakan pilih lagi !!")
-            else:
-                break
+
+            try:
+                pilih_Menu = int(input("Pilih Menu : "))
+                if pilih_Menu != 1 and pilih_Menu != 2 and pilih_Menu != 3 and pilih_Menu != 4:
+                    print("Menu yang kamu pilih salah, silakan pilih menu yang tersedia..")
+                else:
+                    break
+
+            except ValueError:
+                print("Menu harus di isi dan harus angka!!")
 
         match pilih_Menu :
             case 1 : View.create_console()
@@ -30,7 +35,7 @@ if __name__ == "__main__":
             case 3 : Operasi.update()
             case 4 : Operasi.delete()
 
-        is_done = input("\nApakah lanjut (y/n) : ")
+        is_done = input("\nTekan 'n' untuk keluar, atau tombol apapun untuk lanjut : ")
         if is_done == "n" or is_done == "N":
             break
     
