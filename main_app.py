@@ -32,7 +32,7 @@ if __name__ == "__main__":
         match pilih_Menu :
             case 1 : View.create_console()
             case 2 : View.read_console()
-            case 3 : Operasi.update()
+            case 3 : View.update_console()
             case 4 : Operasi.delete()
 
         is_done = input("\nTekan 'n' untuk keluar, atau tombol apapun untuk lanjut : ")

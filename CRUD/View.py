@@ -51,7 +51,7 @@ def read_console():
 
     # Data
     for index, data in enumerate(data_file):
-        data_break = data.split(",")
+        data_break = data.split(',')
         pk = data_break[0]
         date_add = data_break[1]
         penulis = data_break[2]
@@ -64,7 +64,7 @@ def read_console():
 
 def create_console():
     '''Fungsi create data di console'''
-    print(f"\n{'-----====== Silakan Masukan Data ======-----':^45}")
+    print(f"\n{'-----====== Silakan Masukan Data ======-----':^45}\n")
     while (True):
         penulis = input("Masukan Nama Penulis : ")
         if penulis == "":
@@ -85,10 +85,73 @@ def create_console():
             print("Tahun tidak boleh kosong!!!")
         elif tahun.isdigit() == False:
             print("Tahun harus angka!!")
+        elif len(tahun) > 4 or len(tahun) < 4:
+            print("Format tahun harus 'YYYY'")
         else:
             break
-    try :
-        Operasi.create(penulis, judul, tahun)
-        print(f"{'-----===== Data berhasil ditambah =====-----':^45}")
-    except Exception:
-        print("Data tidak berhasil di tambahkan")
+
+    Operasi.create(penulis, judul, tahun)
+    read_console()
+
+def update_console():
+    '''Fungsi update data di console'''
+    read_console()
+    while (True):
+        while(True):
+            try :
+                nomor = int(input("Pilih Nomor Buku : "))
+                break
+            except ValueError:
+                print("Nomor harus diisi dan berupa angka!!")
+        data_buku = Operasi.read(index=nomor)
+
+        if data_buku:
+            break
+        else:
+            print("Nomor Buku tidak valid!!")
+    
+    data_break = data_buku.split(',')
+    pk = data_break[0]
+    date_add = data_break[1]
+    penulis = data_break[2]
+    judul = data_break[3]
+    tahun = data_break[4][:-1]
+    
+    while (True):
+        print("\nSilakan pilih data yang ingin diubah")
+        divider()
+        print(f"1. Penulis \t: {penulis:.40}")
+        print(f"2. Buku \t: {judul:.40}")
+        print(f"3. Tahun \t: {tahun:4}")
+        divider()
+        
+        user_option = input("Pilih Data \t: ")
+        
+        match user_option :
+            case "1" : penulis = input("Penulis \t: ")
+            case "2" : judul = input("Judul \t: ")
+            case "3" :
+                while (True):
+                    tahun = input("Tahun \t: ")
+                    if tahun == "":
+                        print("Tahun tidak boleh kosong!!!")
+                    elif tahun.isdigit() == False:
+                        print("Tahun harus angka!!")
+                    elif len(tahun) > 4 or len(tahun) < 4:
+                        print("Format tahun harus 'YYYY'")
+                    else:
+                        break
+            case _: print("Data tidak valid!!")
+
+        print("\nData baru")
+        divider()
+        print(f"1. Penulis \t: {penulis:.40}")
+        print(f"2. Buku \t: {judul:.40}")
+        print(f"3. Tahun \t: {tahun:4}")
+        divider()
+
+        is_done = input("Tekan sembarang untuk pilih data lagi atau Tekan 'y' untuk update data : ")
+        if is_done == 'y' or is_done == "Y":
+            break
+
+    Operasi.update(nomor, pk, date_add, penulis, judul, tahun)
