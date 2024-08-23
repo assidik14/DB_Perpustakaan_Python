@@ -162,3 +162,43 @@ def update_console():
         print(f"\n{'-----===== Data disimpan =====-----':^45}")
     except Exception:
         print(f"\n{'##### Data tidak berhasil disimpan #####':^45}")
+
+def delete_console():
+    '''Fungsi delete console'''
+    read_console()
+    while (True):
+        while(True):
+            try :
+                nomor = int(input("Pilih nomor buku yang akan dihapus: "))
+                break
+            except ValueError:
+                print("Nomor harus diisi dan berupa angka!!")
+                
+        data_buku = Operasi.read(index=nomor)
+
+        if data_buku:
+            data_break = data_buku.split(',')
+            pk = data_break[0]
+            date_add = data_break[1]
+            penulis = data_break[2]
+            judul = data_break[3]
+            tahun = data_break[4][:-1]
+
+
+            print("\nData yang akan dihapus : ")
+            divider()
+            print(f"1. Penulis \t: {penulis:.40}")
+            print(f"2. Buku \t: {judul:.40}")
+            print(f"3. Tahun \t: {tahun:4}")
+            divider()
+            is_done = input("Tekan sembarang untuk pilih data lagi atau Tekan 'y' untuk hapus data : ")
+            if is_done == 'y' or is_done == "Y":
+                try:
+                    Operasi.delete(nomor)
+                except Exception:
+                    print(f"\n{'##### Data Gagal Dihapus #####':^45}")
+                break
+        else:
+            print("Nomor Buku tidak valid!!")
+    
+    print(f"\n{'-----===== Data Berhasil Dihapus =====-----':^45}")

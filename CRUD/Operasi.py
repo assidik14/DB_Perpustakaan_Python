@@ -1,6 +1,7 @@
 from . import Database
 from . import Util
 import time
+import os
 
 def first_data():
     '''Init data pertama kali'''
@@ -101,3 +102,23 @@ def update(nomor, pk, date_add, penulis, judul, tahun):
             file.write(str_data)
     except Exception:
         False
+
+def delete(nomor):
+    '''Fungsi Delete Data'''
+    try:
+        with open(Database.DB_NAME, mode="r", encoding="utf-8") as file:
+            counter = 0
+            while(True):
+                content = file.readline()
+                if len(content) == 0:
+                    break
+                elif counter == nomor - 1:
+                    pass
+                else:
+                    with open("temp_data.txt", mode="a", encoding="utf-8") as temp_file:
+                        temp_file.write(content)
+                counter += 1
+    except Exception:
+        print("Database Error")
+
+    os.rename("temp_data.txt",Database.DB_NAME)

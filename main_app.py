@@ -1,5 +1,4 @@
-from CRUD import Operasi, View
-from CRUD import Database
+from CRUD import View, Database
 
 if __name__ == "__main__":
 
@@ -33,7 +32,7 @@ if __name__ == "__main__":
             case 1 : View.create_console()
             case 2 : View.read_console()
             case 3 : View.update_console()
-            case 4 : Operasi.delete()
+            case 4 : View.delete_console()
 
         is_done = input("\nTekan 'n' untuk keluar, atau tombol apapun untuk lanjut : ")
         if is_done == "n" or is_done == "N":
