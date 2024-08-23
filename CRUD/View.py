@@ -89,9 +89,12 @@ def create_console():
             print("Format tahun harus 'YYYY'")
         else:
             break
-
-    Operasi.create(penulis, judul, tahun)
-    read_console()
+    try:
+        Operasi.create(penulis, judul, tahun)
+        print(f"\n{'-----===== Data Berhasil Ditambah =====-----':^45}")
+        read_console()
+    except Exception:
+        print(f"\n{'##### Data tidak berhasil di tambahkan #####':^45}")
 
 def update_console():
     '''Fungsi update data di console'''
@@ -153,5 +156,9 @@ def update_console():
         is_done = input("Tekan sembarang untuk pilih data lagi atau Tekan 'y' untuk update data : ")
         if is_done == 'y' or is_done == "Y":
             break
-
-    Operasi.update(nomor, pk, date_add, penulis, judul, tahun)
+    
+    try :
+        Operasi.update(nomor, pk, date_add, penulis, judul, tahun)
+        print(f"\n{'-----===== Data disimpan =====-----':^45}")
+    except Exception:
+        print(f"\n{'##### Data tidak berhasil disimpan #####':^45}")

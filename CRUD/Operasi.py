@@ -61,9 +61,8 @@ def create(penulis:str, judul:str, tahun:int):
         with open(Database.DB_NAME, mode="a", encoding="utf-8") as file:
             str_data = f"{data['pk']},{data['date_add']},{data['penulis']},{data['judul']},{data['tahun']}\n"
             file.write(str_data)
-            print(f"\n{'-----===== Data Berhasil Ditambah =====-----':^45}")
     except Exception:
-        print(f"\n{'##### Data tidak berhasil di tambahkan #####':^45}")
+        False
 
 def read(**kwargs):
     '''FUNGSI READ DATA'''
@@ -100,6 +99,5 @@ def update(nomor, pk, date_add, penulis, judul, tahun):
         with open(Database.DB_NAME, mode="r+", encoding="utf-8") as file:
             file.seek(panjang_data*(nomor-1))
             file.write(str_data)
-            print(f"\n{'-----===== Data disimpan =====-----':^45}")
     except Exception:
-        print(f"\n{'##### Data tidak berhasil disimpan #####':^45}")
+        False
